@@ -1,0 +1,13 @@
+def line_stepper(start, k): #0given
+print('DEBUG:', !BLANK)  #1given #blankk, start
+if start == 0 and k == !BLANK:   #1given #blank0
+return !BLANK    #2given #blank1
+elif k == 0: #1given
+return !BLANK    #2given #blank0
+else: #1given
+left = line_stepper(!BLANK, !BLANK)    #2given #blankstart - 1 #blank k - 1
+right = line_stepper(!BLANK, !BLANK)    #2given #blank start + 1 #blank k - 1
+return left + right #2given
+print('DEBUG:', !BLANK)
+# !BLANK
+# !BLANK
