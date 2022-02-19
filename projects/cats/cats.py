@@ -1,5 +1,8 @@
 """Typing test implementation"""
 
+from re import T
+
+from numpy import empty
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -31,6 +34,17 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    subset =  []
+    
+    for i in range(len(paragraphs)):
+        if select(paragraphs[i]):
+            subset.append(paragraphs[i])
+
+    if k >= len(subset):
+        return ''
+    else:
+        return subset[k] 
+        
     # END PROBLEM 1
 
 
@@ -49,6 +63,16 @@ def about(topic):
     """
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
+    def select(paragraph):
+        words = split(lower(remove_punctuation(paragraph))) 
+        for i in words:
+            if i in topic:
+                return True
+        return False
+    return select
+
+
+    return select
     "*** YOUR CODE HERE ***"
     # END PROBLEM 2
 
@@ -78,8 +102,25 @@ def accuracy(typed, reference):
     """
     typed_words = split(typed)
     reference_words = split(reference)
+    
+    minlen = min(len(typed_words), len(reference_words)) 
+    count = 0
+
+    for i in range(minlen):
+        if typed_words[i] == reference_words[i] and len(typed_words) > i:
+            count += 1
+    
+    if len(typed_words) == 0 and len(reference_words) == 0:
+        return  100.0 
+
+    if len(typed_words) == 0 or len(reference_words) == 0:
+        return 0.0 
+    
+    return 100 * count / minlen / (max(1, len(typed_words)/len(reference_words)))
+
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 3
 
 
@@ -96,6 +137,9 @@ def wpm(typed, elapsed):
     2.0
     """
     assert elapsed > 0, 'Elapsed time must be positive'
+    mins = float(elapsed / 60)
+    words  = float(len(typed) / 5)
+    return float(words  / mins)
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
     # END PROBLEM 4
@@ -125,6 +169,22 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    if typed_word in word_list:
+        return typed_word
+    
+    corrected_string  = ''
+    smallest_diff = limit + 1
+    for i in word_list:
+        if diff_function(typed_word, i, limit) < smallest_diff:
+            corrected_string = i 
+            smallest_diff = diff_function(typed_word, i, limit)
+
+    if smallest_diff > limit:
+        return typed_word
+    else:
+        return corrected_string
+    
+
     # END PROBLEM 5
 
 
@@ -151,7 +211,21 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    minlen = min(len(start), len(goal))
+    diff =  abs(len(start) - len(goal))
+
+    if start == goal:
+        return 0
+    if limit == 0:
+        return 1
+    if len(start) == 0 or len(goal) == 0:
+        return min(diff, limit + 1)
+   
+    if start[0] != goal[0]:
+        return 1 + sphinx_swaps(start[1:], goal[1:], limit - 1)
+    
+    return sphinx_swaps(start[1:], goal[1:], limit)
+        
     # END PROBLEM 6
 
 
