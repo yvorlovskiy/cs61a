@@ -1,0 +1,33 @@
+=====================================================================
+Assignment: Homework 4
+OK, version v1.18.1
+=====================================================================
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Running tests
+
+---------------------------------------------------------------------
+Doctests for SmartFridge
+
+>>> fridgey = SmartFridge()
+>>> fridgey.add_item('Mayo', 1)
+Traceback (most recent call last):
+  File "/Users/yuryorlovskiy/cs61a/hws/hw04/parsons_probs/smartfridge.py", line 16, in add_item
+    self.items[item] += quantity
+KeyError: 'Mayo'
+
+# Error: expected
+#     'I now have 1 Mayo'
+# but got
+#     Traceback (most recent call last):
+#       ...
+#     KeyError: 'Mayo'
+
+---------------------------------------------------------------------
+Test summary
+    0 test cases passed before encountering first failed test case
+
+Backup... 0.0% completeBackup... 100% complete
+[32mBackup successful for user: yuryo@berkeley.edu[0m
+[32mURL: https://okpy.org/cal/cs61a/sp22/hw04/backups/19mrlm[0m
+
