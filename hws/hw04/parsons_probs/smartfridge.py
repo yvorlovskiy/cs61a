@@ -13,14 +13,10 @@ class SmartFridge:
     def __init__(self):
         self.items = {}
     def add_item(self, item, quantity):
-        self.items[item] += quantity
-        return f'I now have {self.items[item]} {item}'
-    def use_item(self, item, quantity):
         self.quantity = quantity
-        if item in self.items:
-            self.items[item] -= min(self.quantity, self.items[item] - self.quantity)
-            return f'I have {self.items[item]} {item} left'
-        if self.items[item] == 0:
-            return f'Uh oh, buy more {item}!'
+        self.quantity += quantity
+        return f'I now have {self.item} {item}'
+    def use_item(self, item, taken):
+        return f'Uh oh, buy more {item}!'
 
 

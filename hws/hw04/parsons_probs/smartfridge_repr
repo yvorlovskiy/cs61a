@@ -2,16 +2,16 @@ class SmartFridge: #0given
 def __init__(self): #1given
 !BLANK.items = {}  #2given #blankself
 def add_item(self, item, quantity): #1given
-self.!BLANK += quantity #2given #blankitems[item]
-return f'I now have {self.!BLANK} {item}' #2given #blankitems[item]
-def use_item(!BLANK):  #1given #blankself, item, quantity
 self.!BLANK = quantity #2given #blankquantity
-if item in !BLANK: #2given #blankself.items
-self.!BLANK -= min(!BLANK, !BLANK)  #3given #blankitems[item] #blankself.quantity #blankself.items[item] - self.quantity
-return f'I have {self.!BLANK} {item} left' #3given #blankitems[item]
-if !BLANK == 0:  #2given #blankself.items[item]
-return f'Uh oh, buy more {item}!' #3given
+self.!BLANK += quantity #2given #blankquantity
+return f'I now have {self.!BLANK} {item}' #2given #blankitem
+def use_item(!BLANK):  #1given #blankself, item, taken
+return f'Uh oh, buy more {item}!' #2given
+if item in !BLANK:
 else:
+self.!BLANK -= min(!BLANK, !BLANK)
+if !BLANK == 0:
+return f'I have {self.!BLANK} {item} left'
 print('DEBUG:', !BLANK)
 print('DEBUG:', !BLANK)
 # !BLANK

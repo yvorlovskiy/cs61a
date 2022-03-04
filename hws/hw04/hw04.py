@@ -11,6 +11,26 @@ def merge(lst1, lst2):
     [2, 4, 5, 6, 7]
     """
     "*** YOUR CODE HERE ***"
+    lst = lst1 + lst2
+    def sort(lst):
+        n = len(lst)
+        for i in range(n):
+            sorted = True
+            for j in range(n - i - 1):
+                if lst[j] > lst[j + 1]:
+                    lst[j], lst[j + 1] = lst[j + 1], lst[j]
+
+                    sorted =  False
+            if sorted:
+                break
+        return lst
+    
+    return sort(lst)
+
+     
+    
+  
+     
 
 
 class Mint:
