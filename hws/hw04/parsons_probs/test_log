@@ -11,23 +11,20 @@ Doctests for SmartFridge
 
 >>> fridgey = SmartFridge()
 >>> fridgey.add_item('Mayo', 1)
-Traceback (most recent call last):
-  File "/Users/yuryorlovskiy/cs61a/hws/hw04/parsons_probs/smartfridge.py", line 18, in add_item
-    return f'I now have {self.item} {item}'
-AttributeError: 'SmartFridge' object has no attribute 'item'
-
-# Error: expected
-#     'I now have 1 Mayo'
-# but got
-#     Traceback (most recent call last):
-#       ...
-#     AttributeError: 'SmartFridge' object has no attribute 'item'
-
+'I now have 1 Mayo'
+>>> fridgey.add_item('Mayo', 2)
+'I now have 3 Mayo'
+>>> fridgey.use_item('Mayo', 2.5)
+'I have 0.5 Mayo left'
+>>> fridgey.use_item('Mayo', 0.5)
+'Uh oh, buy more Mayo!'
+-- OK! --
 ---------------------------------------------------------------------
 Test summary
-    0 test cases passed before encountering first failed test case
+    1 test cases passed! No cases failed.
 
 Backup... 0.0% completeBackup... 100% complete
+[33mAssignment is due in 3 hours and 11 seconds[0m
 [32mBackup successful for user: yuryo@berkeley.edu[0m
-[32mURL: https://okpy.org/cal/cs61a/sp22/hw04/backups/oONOnK[0m
+[32mURL: https://okpy.org/cal/cs61a/sp22/hw04/backups/49E9xn[0m
 

@@ -1,6 +1,5 @@
 def merge(lst1, lst2):
     """Merges two sorted lists.
-
     >>> merge([1, 3, 5], [2, 4, 6])
     [1, 2, 3, 4, 5, 6]
     >>> merge([], [2, 4, 6])
@@ -35,9 +34,7 @@ def merge(lst1, lst2):
 
 class Mint:
     """A mint creates coins by stamping on years.
-
     The update method sets the mint's stamp to Mint.present_year.
-
     >>> mint = Mint()
     >>> mint.year
     2021
@@ -68,9 +65,11 @@ class Mint:
         self.update()
 
     def create(self, coin):
+        return coin(self.year)
         "*** YOUR CODE HERE ***"
 
     def update(self):
+        self.year = self.present_year
         "*** YOUR CODE HERE ***"
 
 
@@ -81,6 +80,7 @@ class Coin:
         self.year = year
 
     def worth(self):
+        return self.cents + (Mint.present_year - self.year - 50 if Mint.present_year - self.year - 50 > 0 else 0)
         "*** YOUR CODE HERE ***"
 
 
@@ -94,7 +94,6 @@ class Dime(Coin):
 
 class VendingMachine:
     """A vending machine that vends some product for some price.
-
     >>> v = VendingMachine('candy', 10)
     >>> v.vend()
     'Nothing left to vend. Please restock.'
@@ -118,7 +117,6 @@ class VendingMachine:
     'Here is your candy.'
     >>> v.add_funds(15)
     'Nothing left to vend. Please restock. Here is your $15.'
-
     >>> w = VendingMachine('soda', 2)
     >>> w.restock(3)
     'Current soda stock: 3'
@@ -130,3 +128,36 @@ class VendingMachine:
     'Here is your soda.'
     """
     "*** YOUR CODE HERE ***"
+    def __init__(self, item, price):
+        self.item = item
+        self.price = price
+        self.stock = 0
+        self.funds = 0
+
+    def add_funds(self, funds):
+        if self.stock <= 0:
+            return f'Nothing left to vend. Please restock. Here is your ${funds}.'
+        self.funds += funds 
+        return f'Current balance: ${self.funds}'
+    
+    def restock(self, stock):
+        self.stock += stock
+        return f'Current {self.item} stock: {self.stock}'
+
+    def vend(self):
+
+        if self.stock <= 0:
+            return 'Nothing left to vend. Please restock.'
+        if self.funds < self.price:
+            return f'You must add ${self.price - self.funds} more funds.'
+        
+        ch = self.funds -  self.price
+        self.funds = 0 
+        self.stock -= 1
+        return (f'Here is your {self.item}.' if ch == 0 else f'Here is your {self.item} and ${ch} change.')
+         
+
+
+    
+    
+    
