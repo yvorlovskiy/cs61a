@@ -182,6 +182,8 @@ class ThrowerAnt(Ant):
     implemented = True
     damage = 1
     food_cost = 3
+    min_range = 0
+    max_range = float('inf')
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
 
     def nearest_bee(self):
@@ -196,13 +198,16 @@ class ThrowerAnt(Ant):
 
         current_bee = None
         current_place = self.place
+        current_distance = 0
 
         while current_place != None:
             current_bee = random_bee(current_place.bees)
-            if current_bee != None and not current_place.is_hive:
+            if current_bee != None and not current_place.is_hive and (self.min_range <= current_distance <= self.max_range):
                 return current_bee
 
             current_place = current_place.entrance
+            current_distance += 1
+            
 
         return None
         # END Problem 3 and 4
@@ -233,9 +238,12 @@ class ShortThrower(ThrowerAnt):
 
     name = 'Short'
     food_cost = 2
+    min_range = 0
+    max_range = 3
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    
+    implemented = True  # Change to True to view in the GUI
     # END Problem 4
 
 
@@ -244,9 +252,11 @@ class LongThrower(ThrowerAnt):
 
     name = 'Long'
     food_cost = 2
+    min_range = 5
+    max_range = float('inf')
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
@@ -273,7 +283,17 @@ class FireAnt(Ant):
         the additional damage if the fire ant dies.
         """
         # BEGIN Problem 5
-        "*** YOUR CODE HERE ***"
+        self.super().reduce_health
+       
+        
+        damage = self.amount + (0 if self.health > 0 else damage)
+
+        for i in range(len(self.place.bees) - 1):
+            health = self.place.bees[i].health
+            self.place.bees[i].reduce_health(damage)
+            if health <=damage:
+                i += 1
+
         # END Problem 5
 
 # BEGIN Problem 6
